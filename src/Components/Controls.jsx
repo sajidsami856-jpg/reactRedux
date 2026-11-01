@@ -1,35 +1,32 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import {useRef} from "react";
+import { counterActions, privacyActions } from '../Store/Index';
 function Controls() {
   const inputVal=useRef();
   const dispatch =useDispatch();
 
   const handleIncriment=()=>{
-    dispatch({type:"INCRIMENT"});
+    dispatch(counterActions.increment());
   }
 
   const handleDecriment=()=>{
-    dispatch({type:"DECRIMENT"});
+  dispatch(counterActions.decrement());
+    
   }
 
   const handleAdd=()=>{
-    dispatch(
-      {type:"ADD",
-        payload:{
-          num:inputVal.current.value,
-        },
-      }
-    );inputVal.current.value="";
+    dispatch(counterActions.add(inputVal.current.value));
+    inputVal.current.value="";
   }
 
   const handleSubtract=()=>{
-    dispatch ({
-      type:"SUBTRACT",
-      payload:{
-        num:inputVal.current.value,
-      }
-    });inputVal.current.value="";
+    dispatch (counterActions.subtract(inputVal.current.value));
+    inputVal.current.value="";
+  }
+
+  const handlePrivacyToggle=()=>{
+    dispatch(privacyActions.toggle());
   }
 
 
@@ -38,6 +35,7 @@ function Controls() {
     <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
         <button type="button" className="btn btn-primary " onClick={handleIncriment}>+1</button>
         <button type="button" className="btn btn-success " onClick={handleDecriment}>-1</button>
+        <button type="button" className="btn btn-warning " onClick={handlePrivacyToggle}>Privacy Btn</button>
     </div>
     <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
         <input ref={inputVal} className='number-input btns-gap' type="text" placeholder='Enter your number '/>
