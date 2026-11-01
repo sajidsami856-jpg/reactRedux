@@ -1,7 +1,8 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import {useRef} from "react";
-import { counterActions, privacyActions } from '../Store/Index';
+import { counterActions } from '../Store/Counter';
+import {privacyActions} from "../Store/Privacy";
 function Controls() {
   const inputVal=useRef();
   const dispatch =useDispatch();
